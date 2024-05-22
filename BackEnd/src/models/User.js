@@ -1,5 +1,5 @@
 const {DataTypes} = require ("sequelize");
-const Carrito = require("./Carrito");
+
 
 module.exports = (sequelize) => {
     const User = sequelize.define(
@@ -50,4 +50,6 @@ module.exports = (sequelize) => {
     return User;
 };
 
-// nombre, apellido, imagen, email, telefono, role
+
+
+// id, *nombre, apellido, imagen, *email, telefono, role("admin", "cliente")

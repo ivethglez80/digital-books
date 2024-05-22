@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
         }
     );
     Carrito.associate = (models) => {
-        Carrito.belongsTo(models.User, {foreignKey:userId});
+        Carrito.belongsTo(models.User, {foreignKey:"userId"});
     }
     return Carrito;
 };

@@ -10,6 +10,10 @@ module.exports = (sequelize) => {
                 primaryKey: true,
                 allowNull: false
             },
+            userId:{
+                type: DataTypes.UUID,
+                allowNull: true
+            },
             avatarID:{
                 type: DataTypes.UUID,
                 allowNull: true
@@ -46,7 +50,10 @@ module.exports = (sequelize) => {
         }
     );
     Personalizado.associate = (models) => {
-        Personalizado.hasMany(models.Orden, {foreignKey:"personalizadoId"})
+        Personalizado.hasMany(models.Orden, {foreignKey:"personalizadoId"});
+        Personalizado.belongsTo(models.User, {foreignKey: "userId"});
     }
     return Personalizado;
 }
+
+// id, userId, avatarID, nombreMain, nombrePadre, nombreMadre, nombreFam1, nombreFam2, nombreMascota

@@ -32,3 +32,5 @@ module.exports = (sequelize) =>{
     }
     return Avatar;
 };
+
+// id, imagen, nombre, descripcion

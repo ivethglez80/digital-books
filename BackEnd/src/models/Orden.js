@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
                 primaryKey: true,
                 allowNull: false
             },
-            PersonalizadoId:{
+            personalizadoId:{
                 type: DataTypes.UUID,
                 allowNull: false
             },
@@ -41,4 +41,6 @@ module.exports = (sequelize) => {
         Orden.belongsTo(models.Carrito, {foreignKey: "ordenId"});
     }
     return Orden;
-}
+};
+
+// id, personalizadoId, bookId, showLink, expirationDate, active

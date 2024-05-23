@@ -1,13 +1,20 @@
 const { Router } = require ("express");
 const booksRouter = Router();
+const {
+    createBookHandler,
+    getBooksListHandler,
+    getBookByIdHandler,
+    modificaBookHandler,
+    eliminaBookHandler
+}= require("./../handlers/booksHandlers")
 
 
 
-booksRouter.post("/", (req,res)=>{      res.send("NIY crear un libro")   }    );
-booksRouter.get("/", (req,res)=>{      res.send(" NIY trae todos los libros")   }    );
-booksRouter.get("/:id", (req,res)=>{      res.send(" NIY trae un solo libro")   }    );
-booksRouter.put("/:id", (req,res)=>{      res.send(" NIY modifica un libro")   }    );
-booksRouter.delete("/:id", (req,res)=>{      res.send(" NIY elimina un libros")   }    );
+booksRouter.post("/", createBookHandler    );
+booksRouter.get ("/", getBooksListHandler  );
+booksRouter.get ("/:id", getBookByIdHandler );
+booksRouter.put("/:id", modificaBookHandler );
+booksRouter.delete("/:id", eliminaBookHandler );
 
 
 

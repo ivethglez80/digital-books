@@ -38,3 +38,5 @@ module.exports = (sequelize) => {
     }
     return Book;
 };
+
+// id, nombre, ImgPrevias, Escenarios, textos

@@ -41,3 +41,5 @@ module.exports = (sequelize) => {
     }
     return Carrito;
 };
+
+// id, userId, ordenId, montoFinal, pagado, fechaCompra

@@ -11,7 +11,7 @@ const {
 
 personalizadoRouter.post("/", createPHandler);
 personalizadoRouter.get("/", getPlistHandler);
-personalizadoRouter.get(":id", getPByIdHandler);
+personalizadoRouter.get("/:id", getPByIdHandler);
 personalizadoRouter.get("/user/:id", getPByUserHandler)
 personalizadoRouter.put("/:id", modificaPHandler);
 personalizadoRouter.delete("/elimina/:id", eliminaPHandler);

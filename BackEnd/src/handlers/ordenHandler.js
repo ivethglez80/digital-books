@@ -10,9 +10,9 @@ const {
 } = require ("./../controllers/ordenController");
 
 const crearOrdenHandler = async (req,res) => {
-    const { personalizadoId, bookId } = req.body;
+    const { personalizadoId, bookId, userId } = req.body;
     try {
-        const newOrden = await crearOrden(personalizadoId, bookId);
+        const newOrden = await crearOrden(personalizadoId, bookId, userId);
         res.status(201).json(newOrden);
     } catch (error) {
         res.status(500).json({error:error.message});
@@ -45,7 +45,7 @@ const ordenByIdHandler = async (req,res) => {
 const ordenByUserHandler = async (req,res) => {
     const {userId} = req.body;
     try {
-        const _found = await ordenById(userId);
+        const _found = await ordenByUser(userId);
         if (_found) {
             res.status(200).json(_found);            
         }else{
@@ -57,9 +57,9 @@ const ordenByUserHandler = async (req,res) => {
 };
 
 const modificaOrdenHandler = async (req,res) => {
-    const {id, personalizadoId, bookId, showLink, expirationDate, active} = req.body;
+    const {id, personalizadoId, bookId, showLink, expirationDate, active, userId} = req.body;
     try {
-        const modified = await modificaOrden(id, personalizadoId, bookId, showLink, expirationDate, active);
+        const modified = await modificaOrden(id, personalizadoId, bookId, showLink, expirationDate, active, userId);
         if(modified){
             res.status(201).json(modified)
         }else{

@@ -2,14 +2,14 @@
 
 const {Orden} = require ("./../db");
 
-const crearOrden = async (personalizadoId, bookId) => {
+const crearOrden = async (personalizadoId, bookId, userId) => {
     try {
-        const _new = await Orden.create({personalizadoId, bookId})
+        const _new = await Orden.create({personalizadoId, bookId, userId})
         return _new
     } catch (error) {
         throw error
     }
-};
+}; 
 
 const ordenList = async () => {
     try {
@@ -50,9 +50,9 @@ const ordenByUser = async (userId) => {
     }
 };
 
-const modificaOrden = async (id, PersonalizadoId, bookId, showLink, expirationDate, active) => {
+const modificaOrden = async (id, PersonalizadoId, bookId, showLink, expirationDate, active, userId) => {
     try {
-        const updated = await Orden.update({PersonalizadoId, bookId, showLink, expirationDate, active},
+        const updated = await Orden.update({PersonalizadoId, bookId, showLink, expirationDate, active, userId},
             {where:{id:id}}
         )
         if(updated>0){

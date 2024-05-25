@@ -6,13 +6,13 @@
 // personalizadoRouter.delete("/elimina/:id", (req,res)=>{res.send("NIY elimina un personalizado")});
 
 // id, avatarID, nombreMain, nombrePadre, nombreMadre, nombreFam1, nombreFam2, nombreMascota
-
+ 
 const {Avatar} = require ("./../db");
 const {Personalizado} = require ("./../db");
 
 
 const createP = async (avatarID, userId, nombreMain, nombrePadre, nombreMadre, nombreFam1, nombreFam2, nombreMascota) =>{
-    const avatarExiste = await Avatar.foundOne({where:{id:avatarID}});
+    const avatarExiste = await Avatar.findOne({where:{id:avatarID}});
     if(!avatarExiste){
         throw new Error(`el avatar id: ${avatarID} no existe`)
     }
@@ -64,7 +64,7 @@ const getPByUser = async (userId) => {
 };
 
 const modificaP = async (id, avatarID, userId, nombreMain, nombrePadre, nombreMadre, nombreFam1, nombreFam2, nombreMascota) => {
-    const avatarExiste = await Avatar.foundOne({where:{id:id}});
+    const avatarExiste = await Avatar.findOne({where:{id:avatarID}});
     if(!avatarExiste){
         throw new Error(`el avatar id: ${avatarID} no existe`)
     }

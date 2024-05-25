@@ -57,7 +57,7 @@ const getPByUserHandler = async (req,res) => {
 const modificaPHandler = async (req,res) => {
     const {id, avatarID, userId, nombreMain, nombrePadre, nombreMadre, nombreFam1, nombreFam2, nombreMascota} = req.body;
     try {
-        const mdfd = await modificaP(avatarID, userId, nombreMain, nombrePadre, nombreMadre, nombreFam1, nombreFam2, nombreMascota)
+        const mdfd = await modificaP(id, avatarID, userId, nombreMain, nombrePadre, nombreMadre, nombreFam1, nombreFam2, nombreMascota)
         if(mdfd){
             res.status(201).json(mdfd)
         }else{

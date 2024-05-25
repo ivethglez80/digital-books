@@ -4,6 +4,7 @@ const booksRouter = require("./booksRouters");
 const carritoRouter = require("./carritosRouters");
 const avatarRouter = require("./avatarRouters");
 const ordenRouter = require ("./ordenRouters");
+const personalizadoRouter = require("./personalizadoRouters");
 
 
 
@@ -14,5 +15,6 @@ mainRouter.use("/libros", booksRouter);
 mainRouter.use("/carrito", carritoRouter);
 mainRouter.use("/avatar", avatarRouter);
 mainRouter.use("/orden", ordenRouter);
+mainRouter.use("/custom", personalizadoRouter);
 
 module.exports = mainRouter;

@@ -31,6 +31,14 @@ module.exports = (sequelize) => {
                 type:DataTypes.BOOLEAN,
                 allowNull:false,
                 defaultValue:false
+            },
+            userId: {
+                type: DataTypes.UUID,
+                allowNull: false,
+                references: {
+                    model: 'User', 
+                    key: 'id'
+                }
             }
         },{
             tablename: "orden",
@@ -39,6 +47,7 @@ module.exports = (sequelize) => {
     );
     Orden.associate = (models) =>{
         Orden.belongsTo(models.Carrito, {foreignKey: "ordenId"});
+        Orden.belongsTo(models.User, { foreignKey: "userId" });
     }
     return Orden;
 };

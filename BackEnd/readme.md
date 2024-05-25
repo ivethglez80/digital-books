@@ -1,0 +1,3 @@
+<h1 align="center" id="title">libros personalizados - API</h1>
+
+<p id="description">para instalar en local: npm i<br>para activarlo: generar en raiz de back el .env con las siguientes credenciales:<br>DB_USER= tu db user<br>DB_PASSWORD= tu db password<br>DB_HOST= localhost<br>DB_PORT= 5432<br>DB_NAME= bookstore<br><br>iniciar la db en sql shell y crear la DB:<br>CREATE DATABASE bookstore;<br>iniciar el API: npm start</p>

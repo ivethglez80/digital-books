@@ -1,10 +1,11 @@
 // id, userId, ordenId, montoFinal, pagado, fechaCompra
-
+const { MercadoPagoConfig, Preference } = require('mercadopago');
 const {Carrito, User, Orden} = require("./../db");
+require('dotenv').config();
 
 const crearCarrito = async (userId, ordenId, montoFinal) => {
     try {
-        const ordenExiste = await Carrito.findOne({where:{id:ordenId}})
+        const ordenExiste = await Orden.findOne({ where: { id: ordenId } });
         if(!ordenExiste){
             throw new Error (`no existe una orden con el id: ${ordenId}`)
         }
@@ -76,22 +77,48 @@ const eliminaCarrito = async (id) => {
     }
 };
 
-const pagarCarrito = async (id, userId, ordenId, montoFinal, pagado, fechaCompra) => {
+const pagarCarrito = async (id, fechaCompra) => {
+    const { ACCESS_TOKEN_TEST } = process.env; 
+    const client = new MercadoPagoConfig({ accessToken: ACCESS_TOKEN_TEST });
+
     try {
         const existe = await Carrito.findOne({where:{id:id, pagado:false}})
         if(!existe){
             throw new Error (`el carrito con id: ${id} no existe o ya está pagado`)
         }
-        const [_updtd] = await Carrito.update({userId, ordenId, montoFinal, pagado:true, fechaCompra}, 
+        
+        const preference = new Preference(client);
+        const preferenceData = {
+            items: [
+                {
+                    title: `Orden ${existe.ordenId}`,
+                    unit_price: parseFloat(existe.montoFinal),
+                    quantity: 1,
+                }
+            ],
+            back_urls: {
+                success: 'http://www.your-site.com/success',
+                failure: 'http://www.your-site.com/failure',
+                pending: 'http://www.your-site.com/pending'
+            },
+            // notification_url: 'http://<ngrok-id>.ngrok.io/webhook',
+            auto_return: 'approved',
+        };
+
+        const response = await preference.create({ body: preferenceData }); console.log(response);
+        const [_updtd] = await Carrito.update({ pagado:true, fechaCompra}, 
             {where:{id:id}})
         if(_updtd>0){
             const _paid = await Carrito.findOne({where:{id:id}})
-            return _paid
+            return {
+                carrito: _paid,
+                init_point: response.init_point,
+              };
         }else{
             throw new Error("No se pudo modificar el producto o no existe.");
         }
     } catch (error) {
-        throw new Error(error.message);
+       throw new Error(error.message);
     }
 };
 

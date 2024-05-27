@@ -16,7 +16,7 @@ carritoRouter.get("/", getListaCarritosHandler );
 carritoRouter.get("/:id", getCarritoDetailHandler );
 carritoRouter.put("/:id", modificaCarritoHandler );
 carritoRouter.delete("/:id", eliminaCarritoHandler );
-carritoRouter.put("/pagar", pagarCarritoHandler );
+carritoRouter.post("/pagar", pagarCarritoHandler );
 
 
 

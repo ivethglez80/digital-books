@@ -34,11 +34,7 @@ module.exports = (sequelize) => {
             },
             userId: {
                 type: DataTypes.UUID,
-                allowNull: false,
-                references: {
-                    model: 'User', 
-                    key: 'id'
-                }
+                allowNull: false,                
             }
         },{
             tablename: "orden",

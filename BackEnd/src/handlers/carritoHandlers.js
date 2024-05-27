@@ -10,9 +10,9 @@ const {
 // id, userId, ordenId, montoFinal, pagado, fechaCompra
 
 const crearCarritoHandler = async (req,res) => {    
-    const {userId, ordenId, montoFinal} = req.body
-    try {
-        const _new = await crearCarrito(userId, ordenId, montoFinal)
+    const {userId, ordenId, montoFinal} = req.body; 
+    try { 
+        const _new = await crearCarrito(userId, ordenId, montoFinal); 
         res.status(201).json(_new)
     } catch (error) {
         res.status(500).json({error:error.message})
@@ -72,9 +72,9 @@ const eliminaCarritoHandler = async (req,res) => {
 };
 
 const pagarCarritoHandler = async (req,res) => {
-    const {id, expirationDate} = req.body
+    const {id, fechaCompra} = req.body
     try {
-        const _pagado = await pagarCarrito(id, expirationDate)
+        const _pagado = await pagarCarrito(id, fechaCompra)
         if(_pagado){
             res.status(201).json(_pagado)
         }else{

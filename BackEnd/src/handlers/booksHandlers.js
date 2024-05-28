@@ -10,9 +10,9 @@ const {
 
 
 const createBookHandler = async(req,res) => {
-    const {nombre, ImgPrevias, Escenarios, textos} = req.body;
+    const {titulo, autor, descripcion, precio, img, rating, opiniones} = req.body;
     try {
-        const newBook = await createBook(nombre, ImgPrevias, Escenarios, textos);
+        const newBook = await createBook(titulo, autor, descripcion, precio, img, rating, opiniones);
         res.status(200).json(newBook);
     } catch (error) {
         res.status(500).json({error:error.message})
@@ -43,9 +43,9 @@ const getBookByIdHandler = async(req,res) => {
 };
 
 const modificaBookHandler = async (req,res) => {
-    const {id, nombre, ImgPrevias, Escenarios, textos} = req.body;
+    const {id, titulo, autor, descripcion, precio, img, rating, opiniones} = req.body;
     try {
-        const modified = await modificaBook(id, nombre, ImgPrevias, Escenarios, textos);
+        const modified = await modificaBook(id, titulo, autor, descripcion, precio, img, rating, opiniones);
         if(modified){
             res.status(200).json(modified)
         }else{

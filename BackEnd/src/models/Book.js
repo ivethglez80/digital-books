@@ -5,28 +5,38 @@ module.exports = (sequelize) => {
     const Book = sequelize.define(
         "Book",{
             id:{
-                type: DataTypes.UUID,
+                type: DataTypes.INTEGER,
                 primaryKey: true,
-                defaultValue: DataTypes.UUIDV4
+                autoIncrement:true
             },
-            nombre:{
+            titulo:{
                 type: DataTypes.STRING,
                 allowNull: false,                
             },
-            ImgPrevias:{
+            autor:{
+                type: DataTypes.STRING,
+                allowNull: true,                
+            },
+            descripcion:{
+                type: DataTypes.STRING,
+                allowNull: true,                
+            },
+            precio:{
+                type: DataTypes.STRING,
+                allowNull: true,                
+            },
+            img:{
                 type: DataTypes.ARRAY(DataTypes.STRING),
                 allowNull:true
             },
-            Escenarios:{
-                type: DataTypes.ARRAY(DataTypes.STRING),
-                allowNull: true,
-                defaultValue: []
+            rating:{
+                type: DataTypes.STRING,
+                allowNull: true,                
             },
-            textos:{
+            opiniones:{
                 type: DataTypes.ARRAY(DataTypes.STRING),
-                allowNull: true,
-                defaultValue:[]
-            }
+                allowNull: true,                
+            },
         },
         {
             tablename:"books",
@@ -39,4 +49,4 @@ module.exports = (sequelize) => {
     return Book;
 };
 
-// id, nombre, ImgPrevias, Escenarios, textos
+// id, titulo, autor, descripcion, precio, img, rating, opiniones

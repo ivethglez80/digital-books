@@ -1,5 +1,5 @@
 const { DataTypes } = require ("sequelize");
-const Carrito = require ("./Carrito");
+const Carrito = require ("./Carrito"); 
 
 module.exports = (sequelize) => {
     const Orden = sequelize.define(
@@ -35,6 +35,10 @@ module.exports = (sequelize) => {
             userId: {
                 type: DataTypes.UUID,
                 allowNull: false,                
+            },
+            slug:{
+                type: DataTypes.STRING,
+                allowNull: true
             }
         },{
             tablename: "orden",

@@ -8,9 +8,9 @@
 
 const {Book} = require("./../db");
 
-const createBook = async(nombre, ImgPrevias, Escenarios, textos)=>{
+const createBook = async(titulo, autor, descripcion, precio, img, rating, opiniones)=>{
     try {
-        const _new = await Book.create({nombre, ImgPrevias, Escenarios, textos});
+        const _new = await Book.create({titulo, autor, descripcion, precio, img, rating, opiniones});
         return _new
     } catch (error) {
         throw new Error(error.message);
@@ -43,9 +43,9 @@ const getBookById = async(id) => {
     }
 }; 
 
-const modificaBook = async (id, nombre, ImgPrevias, Escenarios, textos) => {
+const modificaBook = async (id, titulo, autor, descripcion, precio, img, rating, opiniones) => {
     try {
-        const modificado = await Book.update({nombre, ImgPrevias, Escenarios, textos}, {where:{id:id}});
+        const modificado = await Book.update({titulo, autor, descripcion, precio, img, rating, opiniones}, {where:{id:id}});
         if(modificado>0){
             const mdfd = await Book.findOne({where:{id:id}});
             return mdfd

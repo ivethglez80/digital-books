@@ -5,6 +5,7 @@ const {
     ordenList,
     ordenById,
     ordenByUser,
+    ordenBySlug,
     modificaOrden,
     eliminaOrden
 } = require ("./../controllers/ordenController");
@@ -56,6 +57,20 @@ const ordenByUserHandler = async (req,res) => {
     }
 };
 
+const ordenBySlugHandler = async(req,res) => {
+    const {slug} = req.params;
+    try {
+        const ordenSlug = await ordenBySlug(slug)
+        if(ordenSlug){
+            res.status(201).json(ordenSlug)
+        }else{
+            res.status(404).json(`libro no encontrado`)
+        }
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    }
+};
+
 const modificaOrdenHandler = async (req,res) => {
     const {id, personalizadoId, bookId, showLink, expirationDate, active, userId} = req.body;
     try {
@@ -89,6 +104,7 @@ module.exports = {
     ordenListHandler,
     ordenByIdHandler,
     ordenByUserHandler,
+    ordenBySlugHandler,
     modificaOrdenHandler,
     eliminaOrdenHandler
 };

@@ -42,6 +42,8 @@ const getBookByIdHandler = async(req,res) => {
     }
 };
 
+
+
 const modificaBookHandler = async (req,res) => {
     const {id, titulo, autor, descripcion, precio, img, rating, opiniones} = req.body;
     try {

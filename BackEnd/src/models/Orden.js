@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
                 allowNull: false
             },
             bookId:{
-                type: DataTypes.UUID,
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             showLink:{
@@ -39,7 +39,7 @@ module.exports = (sequelize) => {
             slug:{
                 type: DataTypes.STRING,
                 allowNull: true
-            }
+            }            
         },{
             tablename: "orden",
             timestamps: false

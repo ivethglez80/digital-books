@@ -78,6 +78,7 @@ const eliminaCarrito = async (id) => {
 };
 
 const pagarCarrito = async (id, fechaCompra) => {
+    /* al pagar que orden pase a estar active:true */
     const { ACCESS_TOKEN_TEST } = process.env; 
     const client = new MercadoPagoConfig({ accessToken: ACCESS_TOKEN_TEST });
 
@@ -106,7 +107,7 @@ const pagarCarrito = async (id, fechaCompra) => {
         };
 
         const response = await preference.create({ body: preferenceData }); console.log(response);
-        const [_updtd] = await Carrito.update({ pagado:true, fechaCompra}, 
+        const [_updtd] = await Carrito.update({ pagado:true, fechaCompra},
             {where:{id:id}})
         if(_updtd>0){
             const _paid = await Carrito.findOne({where:{id:id}})

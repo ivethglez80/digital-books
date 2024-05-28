@@ -43,6 +43,7 @@ const getBookById = async(id) => {
     }
 }; 
 
+
 const modificaBook = async (id, titulo, autor, descripcion, precio, img, rating, opiniones) => {
     try {
         const modificado = await Book.update({titulo, autor, descripcion, precio, img, rating, opiniones}, {where:{id:id}});

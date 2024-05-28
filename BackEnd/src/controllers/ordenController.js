@@ -1,10 +1,15 @@
 // id, PersonalizadoId, bookId, showLink, expirationDate, active
 
-const {Orden} = require ("./../db");
+const {Orden, Personalizado, Book} = require ("./../db");
 
 const crearOrden = async (personalizadoId, bookId, userId) => {
+    const urlBase = "http://localhost:3001/";
     try {
-        const _new = await Orden.create({personalizadoId, bookId, userId})
+        const p = await Personalizado.findOne({where:{id:personalizadoId}});         
+        const b = await Book.findOne({where:{id:bookId}});         
+        const sl = `${p.nombreMain}-${b.titulo}-${p.P_id}`.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        const lnk = `${urlBase}${sl}`
+        const _new = await Orden.create({personalizadoId, bookId, userId, slug: sl, showLink: lnk})
         return _new
     } catch (error) {
         throw error
@@ -50,6 +55,20 @@ const ordenByUser = async (userId) => {
     }
 };
 
+const ordenBySlug = async(slug) => {
+    try {
+        const existe = await Orden.findOne({where:{slug:slug}});
+        if(existe){
+            return existe
+        }else{
+            return null
+        }
+    } catch (error) {
+        throw error;
+    }
+};
+
+
 const modificaOrden = async (id, PersonalizadoId, bookId, showLink, expirationDate, active, userId) => {
     try {
         const updated = await Orden.update({PersonalizadoId, bookId, showLink, expirationDate, active, userId},
@@ -84,6 +103,7 @@ module.exports = {
     ordenList,
     ordenById,
     ordenByUser,
+    ordenBySlug,
     modificaOrden,
     eliminaOrden
 }
